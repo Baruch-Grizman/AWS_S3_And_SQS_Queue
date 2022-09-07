@@ -1,0 +1,55 @@
+$ terraform init // initialise terraform
+$ terraform fmt // format the code, make look aligned and professional
+$ terraform plan // This will show you what resources terraform will create
+$ terraform apply // This will create all the resources in your AWS account
+$ terraform state list // This will show our resources
+$ terraform state show aws_vpc.tfc_vpc // This will show our information from AWS, same info as the json file from the AWS API
+# "terraform state show" - require a resource for display, while
+# "terraform show" - will show everything which can be massive if you have a very large environment
+$ terraform show // This will show our entire state information
+$ terraform destroy -auto-approve // This will destroy all that we apply, without asking for confirmation
+# -auto-approve // while using this flag, the confirmation will be auto applied, useful in automation
+# should be checked before applying, with "terraform plan"
+
+#
+> ssh-keygen -t ed25519 // create an AWS EC2 Key Pair, from Windows terminal
+> ls ~/.ssh // list all keys in .ssh folder
+
+> terraform state show aws_instance.dev_node // display the instance resource data, to retrieve the public ip address
+
+# ssh into the instance, from terminal
+> ssh -i ~/.ssh/tfckey ubuntu@44.203.164.147 // using public ip address
+
+# The authenticity of host '44.203.164.147 (44.203.164.147)' can't be established.
+# ECDSA key fingerprint is SHA256:KqiD29NN071nKsYjaVka2qBUB3zRWdR+b/rDGPkxHfs.
+# Are you sure you want to continue connecting (yes/no/[fingerprint])?
+> yes
+# Warning: Permanently added '44.203.164.147' (ECDSA) to the list of known hosts.
+# now logged in, and all good
+
+$ terraform apply -replace aws_instance.dev_node // this will destroy existing instance, and replace with new instance
+$ terraform destroy -auto-approve // destroy (delete) entire deployment
+$ terraform console // this allows you to check commands and conditions before applying (type exit to get out of the console)
+
+# this example for running with the -var= flag, will override any variable within the variable.tf or terraform.tfvars files
+$ terraform console -var="host_os=linux"
+
+# if you want override the default terraform.tfvars file, with a different vars file, you can set it with the -var-file= flag
+$ terraform console -var-file="dev.tfvars"
+
+# example for conditional expression
+# condition ? true_val : false_val
+var.host_os == "windows" ? ["Powershell", "-Command"] : ["bash", "-c"]
+
+# to add small changes to the deployment, will use the -refresh-only flag
+$ terraform apply -refresh-only
+
+# to check outputs
+$ terraform output
+
+git remote add origin https://github.com/Baruch-Grizman/AWS_S3_And_SQS_Queue.git
+git status
+git push origin
+git push -u origin master
+
+git push -f -u origin master
