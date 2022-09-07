@@ -1,6 +1,6 @@
 # AWS S3 And SQS Queue  
   
-Creating a Terraform resource definition for aws s3 bucket and sqs queue then let the bucket notify the queue\
+Creating a Terraform resource definition for aws s3 bucket and sqs queue then let the bucket notify the queue
   
 ## Task Description  
 ### An explanation of the various files in the project
@@ -16,21 +16,21 @@ AWS_S3_And_SQS_Queue/
 └── README.md  
 ```   
 commands.txt\
-List of commands for execution\
+List of commands for execution
 
 main.tf\
-Creating the `S3 Bucket` & A network access control list (`ACL`)\
+Creating the `S3 Bucket` & A network access control list (`ACL`)
 
 notification.tf\
-Creating the `S3 Queue` (with policy) and `Bucket Notification`\
+Creating the `S3 Queue` (with policy) and `Bucket Notification`
 
 providers.tf\
-Setting up the `AWS Provider` with Terraform\
+Setting up the `AWS Provider` with Terraform
 
 variables.tf\
-List of variables to be using in other Resources\
+List of variables to be using in other Resources
   
-README.md\  
+README.md
 This is a `Markdown` file documenting the purpose and usage of our project
   
 ## # Resources
